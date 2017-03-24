@@ -1,0 +1,44 @@
+<project name="Webapp Precompilation" default="all" basedir=".">
+    <import file="${tomcat.home}/bin/catalina-tasks.xml"/>
+    <target name="jspc">
+        <jasper
+                validateXml="false"
+                uriroot="${app.dir}"
+                webXmlFragment="${root.dir}/jsp-pages/generated_web.xml"
+                outputDir="${root.dir}/jsp-pages/" />
+    </target>
+    <target name="compile">
+        <javac destdir="${root.dir}/jsp-pages/"
+               srcdir="${root.dir}/jsp-pages/"
+               optimize="off"
+               encoding="UTF-8"
+               fork="true" executable="${jdk.home}\bin\javac.exe"
+               debug="on" failonerror="false"
+               includeantruntime="on"
+               excludes="**/*.smap">
+            <classpath>
+                <pathelement location="${app.dir}/WEB-INF/classes"/>
+                <fileset dir="${app.dir}/WEB-INF/lib">
+                    <include name="*.jar"/>
+                </fileset>
+                <pathelement location="${tomcat.home}/lib"/>
+                <fileset dir="${tomcat.home}/lib">
+                    <include name="*.jar"/>
+                </fileset>
+                <fileset dir="${tomcat.home}/bin">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+            <include name="**" />
+            <exclude name="tags/**" />
+        </javac>
+    </target>
+    <target name="cleansrc">
+        <delete>
+            <fileset dir="${root.dir}/jsp-pages">
+                <include name="**/*.java"/>
+            </fileset>
+        </delete>
+    </target>
+    <target name="all" depends="jspc,compile,cleansrc"></target>
+</project>
