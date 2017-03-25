@@ -203,8 +203,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Main.compile();
-//        Main.generateWebFragment();
-//        Main.generateJar();
+        Main.generateWebFragment();
+        Main.generateJar();
     }
 
 }
