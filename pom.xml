@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xxx</groupId>
-    <artifactId>rmds-pages</artifactId>
+    <artifactId>jspc-jar</artifactId>
     <packaging>jar</packaging>
-    <name>rmds-pages</name>
+    <name>jspc-jar</name>
     <version>1.0</version>
     <description>rmds-pages</description>
     <properties>
