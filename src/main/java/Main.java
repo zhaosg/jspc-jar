@@ -32,8 +32,7 @@ public class Main {
     }
 
     public static void init() {
-        parent = new File("").getAbsolutePath();
-
+        parent = new File(Main.class.getClassLoader().getResource("").getFile()).getAbsolutePath();
         loadConfig();
         Properties p = new Properties();
         p.setProperty(Velocity.INPUT_ENCODING, "UTF-8");
@@ -159,7 +158,7 @@ public class Main {
         try {
             createJarArchive(new File(parent + File.separator + "jsp-pages.jar"), new File(parent + File.separator + "jsp-pages"));
             logger.info("jar servlets：success");
-            FileUtils.deleteDirectory(new File(parent + File.separator + "jsp-pages"));
+//            FileUtils.deleteDirectory(new File(parent + File.separator + "jsp-pages"));
         } catch (Exception e) {
             logger.error("", e);
         }
@@ -186,9 +185,9 @@ public class Main {
             p.setProperty("app.dir", app_dir);
             String java_home = System.getProperty("java.home");
             if (java_home.endsWith("jre")) {
-                java_home = java_home.substring(0, java_home.length() - 5);
+                java_home = java_home.substring(0, java_home.length() - 4);
             }
-            p.setProperty("jdk.home", "C:\\Program Files\\Java\\jdk1.8.0_10");
+            p.setProperty("jdk.home", java_home);
             p.init();
             ProjectHelper.configureProject(p, buildFile);
             p.executeTarget(p.getDefaultTarget());
